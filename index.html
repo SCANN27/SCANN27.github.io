@@ -11,31 +11,35 @@
         body {
             font-family: 'Lora', serif; display: flex; justify-content: center; align-items: center;
             min-height: 100vh; overflow: hidden; position: relative;
-            background: radial-gradient(circle at 50% 30%, rgba(250, 245, 235, 0.8) 0%, rgba(245, 240, 230, 0.6) 50%, #f4f1ea 100%);
+            /* Fondo base claro y neutro para resaltar las hojas */
+            background: radial-gradient(circle at 50% 50%, #ffffff 0%, #f4f6f0 60%, #e6ebe0 100%);
+            
+            /* SI PREFIERES USAR LA IMAGEN QUE SUBISTE (fondo.png), BORRA EL "/*" DE LA LÍNEA DE ABAJO: */
+            /* background-image: url('fondo.png'); background-size: cover; background-position: center; */
         }
         
         body::before {
             content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJub25lIiBzdHJva2U9IiNlMGU1ZTAiIHN0cm9rZS13aWR0aD0iMC41IiAvPjwvc3ZnPg==');
-            opacity: 0.2; pointer-events: none; z-index: 1;
+            opacity: 0.25; pointer-events: none; z-index: 1;
         }
 
-        /* LIANAS DORADAS */
-        #golden-vines-bg {
+        /* FONDO DE HOJAS DE ÁRBOLES (SVG) */
+        #green-leaves-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 2; pointer-events: none; opacity: 0.8;
+            z-index: 2; pointer-events: none; opacity: 0.9;
         }
 
-        /* DESTELLOS MÁGICOS (SPARKLES) */
+        /* LUCIÉRNAGAS (DESTELLOS SUAVES) */
         #sparkles-container {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             z-index: 2; pointer-events: none; overflow: hidden;
         }
         .sparkle {
             position: absolute; border-radius: 50%;
-            background: radial-gradient(circle, #fff 0%, #f4d068 40%, rgba(244, 208, 104, 0) 80%);
+            background: radial-gradient(circle, #fff 0%, #e0f2cb 40%, rgba(224, 242, 203, 0) 80%);
             animation: twinkle linear forwards;
-            filter: drop-shadow(0 0 5px #f4d068);
+            filter: drop-shadow(0 0 5px #e0f2cb);
         }
         @keyframes twinkle {
             0% { opacity: 0; transform: scale(0.5); }
@@ -43,7 +47,7 @@
             100% { opacity: 0; transform: scale(0.5); }
         }
 
-        /* CORAZONES VERDES */
+        /* CORAZONES VERDES CAYENDO */
         #leaves-container {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             z-index: 3; pointer-events: none; overflow: hidden;
@@ -51,7 +55,7 @@
         .heart {
             position: absolute; width: 15px; height: 15px; background-color: #7ea887;
             transform: rotate(-45deg); animation: fall linear forwards;
-            filter: drop-shadow(0px 3px 4px rgba(56, 102, 65, 0.2)); opacity: 0.8;
+            filter: drop-shadow(0px 3px 4px rgba(56, 102, 65, 0.2)); opacity: 0.85;
         }
         .heart::before, .heart::after {
             content: ""; position: absolute; width: 15px; height: 15px; background-color: #7ea887; border-radius: 50%;
@@ -60,62 +64,71 @@
         .heart::after { left: 7.5px; top: 0; }
         @keyframes fall {
             0% { top: -10%; transform: translateX(0) rotate(-45deg) scale(var(--scale, 1)); opacity: 0; }
-            10% { opacity: 0.8; }
+            10% { opacity: 0.85; }
             50% { transform: translateX(30px) rotate(-20deg) scale(var(--scale, 1)); }
             100% { top: 110%; transform: translateX(-30px) rotate(-70deg) scale(var(--scale, 1)); opacity: 0; }
         }
 
-        /* BOTÓN DE MÚSICA FLOTANTE */
+        /* BOTÓN DE MÚSICA FLOTANTE (FIJADO PARA NO ROMPER PANTALLA EN CELULARES) */
         #music-btn {
             position: fixed; top: 20px; right: 20px; z-index: 50;
-            background: rgba(255, 255, 255, 0.8); border: 1px solid #d4af37;
+            background: rgba(255, 255, 255, 0.9); border: 1px solid #7ea887;
             border-radius: 50%; width: 45px; height: 45px;
             font-size: 1.2rem; cursor: pointer; display: none; 
             box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: all 0.3s ease;
         }
         #music-btn:hover { background: #fff; transform: scale(1.1); }
 
-        /* EL SOBRE */
+        /* =========================================
+           1. EL SOBRE VERDE MUSGO
+           ========================================= */
         #envelope-screen {
             position: absolute; z-index: 20; display: flex; flex-direction: column;
             align-items: center; justify-content: center; width: 100%; height: 100vh;
             transition: opacity 0.8s ease, transform 0.8s ease;
         }
         .envelope {
-            position: relative; width: 320px; height: 220px; background: #b89947; 
+            position: relative; width: 320px; height: 220px; 
+            background: #3a482b; /* Interior Verde Musgo Oscuro */
             cursor: pointer; margin-top: 50px; border-radius: 4px;
-            box-shadow: 0 20px 40px rgba(56, 102, 65, 0.25); transition: transform 0.3s ease;
+            box-shadow: 0 20px 40px rgba(45, 64, 38, 0.35); transition: transform 0.3s ease;
         }
         .envelope:hover { transform: translateY(-5px); }
+        
         .envelope .flap {
             position: absolute; top: 0; left: 0; width: 0; height: 0;
             border-left: 160px solid transparent; border-right: 160px solid transparent;
-            border-top: 130px solid #f4f7f4; 
+            border-top: 130px solid #6b824a; /* Solapa superior Verde Musgo Claro */
             transform-origin: top; transition: transform 0.6s ease, z-index 0.2s;
-            z-index: 4; filter: drop-shadow(0px 3px 3px rgba(0,0,0,0.1));
+            z-index: 4; filter: drop-shadow(0px 3px 3px rgba(0,0,0,0.15));
         }
         .envelope .pocket {
             position: absolute; bottom: 0; left: 0; width: 0; height: 0;
-            border-left: 160px solid #e3ebe4; border-right: 160px solid #e3ebe4;
-            border-bottom: 120px solid #dce5dd; border-top: 100px solid transparent;
-            z-index: 3; pointer-events: none; filter: drop-shadow(0px -2px 3px rgba(0,0,0,0.03));
+            border-left: 160px solid #5d733e; border-right: 160px solid #5d733e; /* Lados */
+            border-bottom: 120px solid #526636; /* Base frontal */
+            border-top: 100px solid transparent;
+            z-index: 3; pointer-events: none; filter: drop-shadow(0px -2px 3px rgba(0,0,0,0.1));
         }
+        
+        /* Sello de Cera Marfil */
         .wax-seal {
             position: absolute; top: 105px; left: 50%; transform: translateX(-50%);
             width: 55px; height: 55px;
-            background: radial-gradient(circle at 30% 30%, #f4d068, #aa8a2a, #8c701d);
+            background: radial-gradient(circle at 30% 30%, #ffffff, #f4f1e1, #dcd5b8);
             border-radius: 50%; z-index: 5;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3), inset 0 0 5px rgba(255,255,255,0.4), inset 0 0 10px rgba(170, 138, 42, 0.8);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3), inset 0 0 5px rgba(255,255,255,0.6), inset 0 0 10px rgba(180, 170, 140, 0.5);
             display: flex; align-items: center; justify-content: center;
-            color: #fff; font-family: 'Great Vibes', cursive; font-size: 1.5rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3); border: 2px solid rgba(255,255,255,0.15);
+            color: #3d4f2b; /* Letras verde oscuro */
+            font-family: 'Great Vibes', cursive; font-size: 1.5rem;
+            text-shadow: 1px 1px 1px rgba(255,255,255,0.8); border: 2px solid rgba(255,255,255,0.6);
             pointer-events: none; transition: opacity 0.3s ease, transform 0.3s ease;
         }
+
         .envelope .letter {
             position: absolute; bottom: 10px; left: 15px; width: 290px; height: 190px;
             background: #fff; border: 1px solid #d0e3d5; z-index: 2; padding: 20px;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.05);
+            border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1);
             transition: height 0.8s ease 0.4s, transform 0.8s ease 0.4s, z-index 0.2s 0.4s; overflow: hidden;
         }
         .letter-content { opacity: 0; text-align: center; transition: opacity 0.3s ease; width: 100%; }
@@ -126,18 +139,21 @@
         #envelope-screen.open .letter { height: 350px; transform: translateY(-10px); z-index: 5; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
         #envelope-screen.open .letter-content { opacity: 1; transition: opacity 0.8s ease 0.9s; }
 
-        .pulse-text { margin-top: 50px; font-size: 1.1rem; color: #386641; animation: pulse 2s infinite; cursor: pointer; text-shadow: 0 0 10px rgba(255,255,255,0.8); }
+        .pulse-text { margin-top: 50px; font-size: 1.1rem; color: #4e6230; animation: pulse 2s infinite; cursor: pointer; font-weight: 600; }
         .btn-open-invitation {
-            background-color: #386641; color: white; border: none; padding: 12px 25px; border-radius: 25px;
+            background-color: #4e6230; color: white; border: none; padding: 12px 25px; border-radius: 25px;
             font-family: 'Lora', serif; font-size: 0.95rem; cursor: pointer; margin-top: 25px; transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(78, 98, 48, 0.3);
         }
-        .btn-open-invitation:hover { background-color: #2c5233; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(56, 102, 65, 0.3); }
+        .btn-open-invitation:hover { background-color: #3a482b; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(78, 98, 48, 0.4); }
 
-        /* TARJETA PRINCIPAL */
+        /* =========================================
+           2. TARJETA PRINCIPAL
+           ========================================= */
         #main-invitation {
-            background: rgba(255, 255, 255, 0.95); border-radius: 20px; padding: 40px 30px; text-align: center;
+            background: rgba(255, 255, 255, 0.96); border-radius: 20px; padding: 40px 30px; text-align: center;
             box-shadow: 0 15px 40px rgba(56, 102, 65, 0.15); max-width: 500px; width: 85%;
-            z-index: 10; position: relative; border: 2px solid #c0dcc0; max-height: 85vh; overflow-y: auto;
+            z-index: 10; position: relative; border: 2px solid #a9c7b0; max-height: 85vh; overflow-y: auto;
             display: none; opacity: 0; transform: scale(0.95); transition: opacity 0.8s ease, transform 0.8s ease;
         }
         #main-invitation.show-invitation { opacity: 1; transform: scale(1); }
@@ -147,75 +163,89 @@
         p.subtitle { font-size: 1.15rem; color: #5a7d61; margin-bottom: 20px; }
         .tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
         .tab-btn { background: transparent; border: 1px solid #7ea887; padding: 8px 15px; border-radius: 25px; color: #386641; cursor: pointer; font-family: 'Lora', serif; transition: all 0.3s ease; }
-        .tab-btn.active, .tab-btn:hover { background: #386641; color: white; }
+        .tab-btn.active, .tab-btn:hover { background: #4e6230; color: white; }
         .tab-content { display: none; animation: fadeIn 0.5s ease-in-out; }
         .tab-content.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .details p { margin: 10px 0; font-size: 1.05rem; color: #2d3436; }
         .countdown { display: flex; justify-content: center; gap: 12px; margin-top: 20px; margin-bottom: 20px;}
-        .time-box { background: #fff; border: 1px solid #7ea887; border-radius: 12px; padding: 10px; min-width: 65px; }
+        .time-box { background: #fff; border: 1px solid #7ea887; border-radius: 12px; padding: 10px; min-width: 65px; box-shadow: 0 4px 8px rgba(56, 102, 65, 0.1); }
         .time-box span { display: block; font-size: 1.5rem; font-family: 'Playfair Display', serif; font-weight: 600; color: #386641; }
         .time-box .label { font-size: 0.7rem; color: #5a7d61; text-transform: uppercase; margin-top: 5px; }
         .map-container iframe { width: 100%; height: 250px; border-radius: 12px; border: none; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        
-        /* BOTÓN DE WHATSAPP */
-        .whatsapp-btn {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            background-color: #25D366; color: white; text-decoration: none;
-            padding: 12px 25px; border-radius: 25px; font-weight: 600; font-size: 1rem;
-            margin-top: 15px; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3); transition: all 0.3s ease;
-        }
-        .whatsapp-btn:hover { background-color: #1ebe5d; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4); }
-        .whatsapp-btn svg { width: 22px; height: 22px; fill: white; }
     </style>
 </head>
 <body>
 
+    <!-- AUDIO (Configurado para leer .mpeg y .mp3 como respaldo) -->
     <audio id="bg-music" loop>
         <source src="musica_invitacion.mpeg" type="audio/mpeg">
+        <source src="musica_invitacion.mp3" type="audio/mpeg">
     </audio>
 
     <button id="music-btn" onclick="toggleMusic()">🔊</button>
 
-    <div id="golden-vines-bg">
+    <!-- FONDO SVG: HOJAS DE ÁRBOLES -->
+    <div id="green-leaves-bg">
         <svg viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
             <defs>
-                <linearGradient id="goldMetalGrad" x1="0%" y1="0%" x2="100%" y2="100%" spreadMethod="reflect">
-                    <stop offset="0%" style="stop-color:#BF953F;stop-opacity:1" />
-                    <stop offset="25%" style="stop-color:#FCF6BA;stop-opacity:1" />
-                    <stop offset="50%" style="stop-color:#B38728;stop-opacity:1" />
-                    <stop offset="75%" style="stop-color:#FBF5B7;stop-opacity:1" />
-                    <stop offset="100%" style="stop-color:#AA771C;stop-opacity:1" />
-                </linearGradient>
-                <filter id="softGoldGlow" x="-50%" y="-50%" width="200%" height="200%">
-                    <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" result="blur" />
-                    <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.8  0 0 0 0 0.6  0 0 0 0 0.2  0 0 0 0.5 0" result="glowColor"/>
-                    <feMerge><feMergeNode in="glowColor"/><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
+                <linearGradient id="gl1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#8FB996"/><stop offset="100%" stop-color="#415D43"/></linearGradient>
+                <linearGradient id="gl2" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#709775"/><stop offset="100%" stop-color="#2D4026"/></linearGradient>
+                <linearGradient id="gl3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#A1CCA5"/><stop offset="100%" stop-color="#557C58"/></linearGradient>
             </defs>
-            <g stroke="url(#goldMetalGrad)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#softGoldGlow)">
-                <path d="M-100,800 C50,600 100,700 150,500 S200,200 100,100 S-50,50 -100,0"/>
-                <path d="M-50,600 C100,550 50,400 150,300 S300,100 200,0"/>
-                <path d="M0,750 C80,650 120,550 80,450 S100,150 50,0" stroke-width="1.5"/>
-                <path d="M1100,800 C950,600 900,700 850,500 S800,200 900,100 S1050,50 1100,0"/>
-                <path d="M1050,600 C900,550 950,400 850,300 S700,100 800,0"/>
-                <path d="M1000,750 C920,650 880,550 920,450 S900,150 950,0" stroke-width="1.5"/>
-                <path d="M200,-50 C300,100 500,150 700,50 S900,-50 1000,0"/>
-                <path d="M800,-50 C700,100 500,150 300,50 S100,-50 0,0"/>
+            
+            <!-- ESQUINA SUPERIOR IZQUIERDA -->
+            <g transform="translate(-50, -50) scale(1.8)">
+                <path d="M0,0 Q100,20 200,80 T350,120" stroke="#4A3B32" stroke-width="2.5" fill="none" opacity="0.6"/>
+                <path d="M100,50 Q150,100 180,150" stroke="#4A3B32" stroke-width="1.5" fill="none" opacity="0.6"/>
+                <path d="M50,20 C30,30 40,70 60,60 C80,50 70,10 50,20Z" fill="url(#gl1)" opacity="0.9"/>
+                <path d="M120,40 C100,60 120,100 150,80 C180,60 140,20 120,40Z" fill="url(#gl2)" opacity="0.85"/>
+                <path d="M180,70 C160,90 180,130 210,110 C240,90 200,50 180,70Z" fill="url(#gl3)" opacity="0.9"/>
+                <path d="M80,80 C60,100 80,140 110,120 C140,100 100,60 80,80Z" fill="url(#gl1)" opacity="0.8"/>
+                <path d="M250,90 C230,110 250,150 280,130 C310,110 270,70 250,90Z" fill="url(#gl2)" opacity="0.85"/>
+            </g>
+            
+            <!-- ESQUINA SUPERIOR DERECHA -->
+            <g transform="translate(1050, -50) scale(-1.8, 1.8)">
+                <path d="M0,0 Q100,20 200,80 T350,120" stroke="#4A3B32" stroke-width="2.5" fill="none" opacity="0.6"/>
+                <path d="M100,50 Q150,100 180,150" stroke="#4A3B32" stroke-width="1.5" fill="none" opacity="0.6"/>
+                <path d="M50,20 C30,30 40,70 60,60 C80,50 70,10 50,20Z" fill="url(#gl2)" opacity="0.9"/>
+                <path d="M120,40 C100,60 120,100 150,80 C180,60 140,20 120,40Z" fill="url(#gl3)" opacity="0.85"/>
+                <path d="M180,70 C160,90 180,130 210,110 C240,90 200,50 180,70Z" fill="url(#gl1)" opacity="0.9"/>
+                <path d="M80,80 C60,100 80,140 110,120 C140,100 100,60 80,80Z" fill="url(#gl2)" opacity="0.8"/>
+                <path d="M250,90 C230,110 250,150 280,130 C310,110 270,70 250,90Z" fill="url(#gl3)" opacity="0.85"/>
+            </g>
+            
+            <!-- ESQUINA INFERIOR IZQUIERDA -->
+            <g transform="translate(-50, 850) scale(1.6, -1.6)">
+                <path d="M0,0 Q100,20 200,80" stroke="#4A3B32" stroke-width="2.5" fill="none" opacity="0.6"/>
+                <path d="M50,20 C30,30 40,70 60,60 C80,50 70,10 50,20Z" fill="url(#gl3)" opacity="0.9"/>
+                <path d="M120,40 C100,60 120,100 150,80 C180,60 140,20 120,40Z" fill="url(#gl1)" opacity="0.85"/>
+                <path d="M180,70 C160,90 180,130 210,110 C240,90 200,50 180,70Z" fill="url(#gl2)" opacity="0.9"/>
+            </g>
+            
+            <!-- ESQUINA INFERIOR DERECHA -->
+            <g transform="translate(1050, 850) scale(-1.6, -1.6)">
+                <path d="M0,0 Q100,20 200,80" stroke="#4A3B32" stroke-width="2.5" fill="none" opacity="0.6"/>
+                <path d="M50,20 C30,30 40,70 60,60 C80,50 70,10 50,20Z" fill="url(#gl1)" opacity="0.9"/>
+                <path d="M120,40 C100,60 120,100 150,80 C180,60 140,20 120,40Z" fill="url(#gl2)" opacity="0.85"/>
+                <path d="M180,70 C160,90 180,130 210,110 C240,90 200,50 180,70Z" fill="url(#gl3)" opacity="0.9"/>
             </g>
         </svg>
     </div>
 
+    <!-- CONTENEDORES DE EFECTOS -->
     <div id="sparkles-container"></div>
     <div id="leaves-container"></div>
 
+    <!-- EL SOBRE VERDE MUSGO -->
     <div id="envelope-screen">
         <div class="envelope" onclick="openEnvelope()">
             <div class="flap"></div>
             <div class="wax-seal"><span>D&A</span></div>
             <div class="letter">
                 <div class="letter-content">
-                    <svg style="width: 30px; height: 30px; margin: 0 auto 10px; display: block; fill: #d4af37;" viewBox="0 0 24 24">
+                    <svg style="width: 30px; height: 30px; margin: 0 auto 10px; display: block; fill: #4e6230;" viewBox="0 0 24 24">
                         <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                     </svg>
                     <p style="font-family: 'Playfair Display', serif; font-size: 1.25rem; color: #386641; font-style: italic; line-height: 1.5;">
@@ -230,6 +260,7 @@
         <p id="instruction-text" class="pulse-text" onclick="openEnvelope()">Toca el sello para abrir</p>
     </div>
 
+    <!-- TARJETA PRINCIPAL -->
     <div id="main-invitation">
         <h1>Damaris & Alan</h1>
         <div class="tabs">
@@ -238,6 +269,7 @@
             <button class="tab-btn" onclick="openTab('dresscode')">Dress Code</button>
         </div>
         
+        <!-- INICIO -->
         <div id="inicio" class="tab-content active">
             <p class="subtitle">¡Nos casamos y queremos celebrarlo contigo!</p>
             <hr style="border: 0; height: 1px; background: #c0dcc0; margin: 15px 0;">
@@ -253,18 +285,9 @@
                 <div class="time-box"><span id="minutes">00</span><div class="label">Min</div></div>
                 <div class="time-box"><span id="seconds">00</span><div class="label">Seg</div></div>
             </div>
-
-            <hr style="border: 0; height: 1px; background: #c0dcc0; margin: 20px 0;">
-            
-            <p style="color: #5a7d61; font-size: 0.95rem;">Por favor, haznos saber si nos acompañarás:</p>
-            <a href="https://wa.me/595991502865?text=¡Hola%20Damaris%20y%20Alan!%20Qué%20emoción,%20confirmo%20mi%20asistencia%20a%20su%20boda.%20💍✨" target="_blank" class="whatsapp-btn">
-                <svg viewBox="0 0 24 24">
-                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                </svg>
-                Confirmar Asistencia
-            </a>
         </div>
         
+        <!-- UBICACIÓN -->
         <div id="ubicacion" class="tab-content">
             <h2>¿Cómo llegar?</h2>
             <p style="margin-bottom: 15px; color: #5a7d61;">Te esperamos en <strong>Quinta Family</strong> para celebrar este gran día.</p>
@@ -273,6 +296,7 @@
             </div>
         </div>
         
+        <!-- DRESS CODE -->
         <div id="dresscode" class="tab-content">
             <h2>Código de Vestimenta</h2>
             <svg style="width: 50px; height: 50px; margin: 10px auto; display: block; fill: #386641;" viewBox="0 0 24 24">
@@ -284,34 +308,26 @@
         </div>
     </div>
 
+    <!-- SCRIPTS MÁGICOS -->
     <script>
-        // --- CONTROL DE MÚSICA ---
         const audio = document.getElementById("bg-music");
         const musicBtn = document.getElementById("music-btn");
         let isPlaying = false;
 
         function toggleMusic() {
-            if (isPlaying) {
-                audio.pause();
-                musicBtn.innerHTML = "🔇";
-            } else {
-                audio.play();
-                musicBtn.innerHTML = "🔊";
-            }
+            if (isPlaying) { audio.pause(); musicBtn.innerHTML = "🔇"; } 
+            else { audio.play(); musicBtn.innerHTML = "🔊"; }
             isPlaying = !isPlaying;
         }
 
-        // --- ANIMACIÓN DEL SOBRE ---
         function openEnvelope() {
             document.getElementById('envelope-screen').classList.add('open');
             document.getElementById('instruction-text').style.opacity = '0';
             
-            // Reproducir música al abrir el sobre
             audio.play().then(() => {
                 isPlaying = true;
-                musicBtn.style.display = "block"; // Mostrar botón de música
+                musicBtn.style.display = "block"; 
             }).catch(e => {
-                // Si el navegador bloquea el auto-play, mostramos el botón de todos modos
                 musicBtn.style.display = "block";
                 musicBtn.innerHTML = "🔇";
             });
@@ -349,7 +365,6 @@
             document.getElementById("seconds").innerHTML = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
         }, 1000);
 
-        // --- DESTELLOS MÁGICOS (Sparkles) ---
         const sparklesContainer = document.getElementById("sparkles-container");
         function createSparkle() {
             const sparkle = document.createElement("div");
@@ -369,7 +384,6 @@
         }
         setInterval(createSparkle, 300);
 
-        // --- CORAZONES CAYENDO ---
         const leavesContainer = document.getElementById("leaves-container");
         function createHeart() {
             const heart = document.createElement("div");
@@ -385,6 +399,6 @@
         setInterval(createHeart, 450); 
     </script>
 </body>
-
 </html>
+
 
